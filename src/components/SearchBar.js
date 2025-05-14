@@ -7,9 +7,16 @@ export default function SearchBar({ onSongSelect }) {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleSongSelect = async (song) => {
-        setIsLoading(true);
-        onSongSelect(song);
-        setIsLoading(false);
+      setIsLoading(true);
+      
+      const songData = {
+        title: song.name,
+        artist: song.artist
+      }
+      localStorage.setItem('selectedSong', JSON.stringify(songData));
+      onSongSelect(songData);
+
+      setIsLoading(false);
     };
 
   useEffect(() => {
